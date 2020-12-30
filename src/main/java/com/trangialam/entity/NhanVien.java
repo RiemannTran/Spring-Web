@@ -1,16 +1,25 @@
 package com.trangialam.entity;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity(name = "NHANVIEN")
-public class NhanVien {
+public class NhanVien implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int manhanvien;
@@ -27,7 +36,18 @@ public class NhanVien {
 	String matkhau;
 	boolean enabled;
 	
+	@ManyToMany
+    @JoinTable(name = " NHANVIENROLE",joinColumns = @JoinColumn(name = "manhanvien"),inverseJoinColumns = @JoinColumn(name = "marole")
+    )
+    private Set<Role> roles;
 	
+	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 	public boolean isEnabled() {
 		return enabled;
 	}

@@ -1,27 +1,61 @@
 package com.trangialam.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import java.util.Set;
 
-@Entity(name = "ROLE")
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity(name = "ROLES")
 public class Role {
 	
 	@Id
-	int roleId;
-	String roleName;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int marole;
+	String tenrole;
 	
-	public int getRoleId() {
-		return roleId;
+	
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "roles")
+    private Set<NhanVien> users;
+
+
+	public Role() {
+		
 	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+
+	public int getMarole() {
+		return marole;
 	}
-	public String getRoleName() {
-		return roleName;
+
+
+	public void setMarole(int marole) {
+		this.marole = marole;
 	}
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+
+
+	public String getTenrole() {
+		return tenrole;
 	}
+
+
+	public void setTenrole(String tenrole) {
+		this.tenrole = tenrole;
+	}
+
+
+	public Set<NhanVien> getUsers() {
+		return users;
+	}
+
+
+	public void setUsers(Set<NhanVien> users) {
+		this.users = users;
+	}
+	
+	
 	
 	
 	
